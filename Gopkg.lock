@@ -1,0 +1,7 @@
+memo = "8c7ca6483deb5f586cb12cca34364f2258aa5da3867471549316027f446fb6ed"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/marpaia/graphite-golang"
+  packages = ["."]
+  revision = "c474c9b821b4d0a4574edc6412b0003fbce233c4"
