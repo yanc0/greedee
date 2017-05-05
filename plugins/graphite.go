@@ -4,26 +4,41 @@ import (
 	"fmt"
 	"math"
 	"github.com/yanc0/collectd-http-server/collectd"
+	"github.com/marpaia/graphite-golang"
 	"errors"
 	"time"
 )
 
-type GraphiteMetric struct {
-	Name string `json:"name"`
-	Value float64 `json:"value"`
-	Timestamp time.Time `json:"time"`
-}
 
 type PluginGraphite struct {
 
 }
 
-func (gMetric GraphiteMetric) Print() {
+func (graphite *PluginGraphite) Send(cMetrics []collectd.CollectDMetric) error {
+	for _, cMetric := range cMetrics {
+		gMetrics, err := fromCollectDMetric(cMetric)
+		if err != nil {
+			return err
+		}
+		for _, gMetric := range gMetrics {
+			gMetric.print()
+		}
+	}
+	return nil
+}
+
+type graphiteMetric struct {
+	Name string `json:"name"`
+	Value float64 `json:"value"`
+	Timestamp time.Time `json:"time"`
+}
+
+func (gMetric graphiteMetric) print() {
 	fmt.Println(gMetric.Name, gMetric.Value, gMetric.Timestamp.Unix())
 }
 
-func fromCollectDMetric(cMetric collectd.CollectDMetric) ([]GraphiteMetric, error) {
-	metrics := make([]GraphiteMetric, len(cMetric.Values))
+func fromCollectDMetric(cMetric collectd.CollectDMetric) ([]graphiteMetric, error) {
+	metrics := make([]graphiteMetric, len(cMetric.Values))
 
 	if cMetric.Host == "" || cMetric.Plugin == "" || cMetric.Type == "" {
 		return nil, errors.New("Graphite Plugin: Invalid Collectd Metric")
@@ -49,18 +64,6 @@ func fromCollectDMetric(cMetric collectd.CollectDMetric) ([]GraphiteMetric, erro
 	return metrics, nil
 }
 
-func (graphite *PluginGraphite) Send(cMetrics []collectd.CollectDMetric) error {
-	for _, cMetric := range cMetrics {
-		gMetrics, err := fromCollectDMetric(cMetric)
-		if err != nil {
-			return err
-		}
-		for _, gMetric := range gMetrics {
-			gMetric.Print()
-		}
-	}
-	return nil
-}
 
 func round(f float64) int64 {
 	if math.Abs(f) < 0.5 {

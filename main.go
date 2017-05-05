@@ -8,7 +8,17 @@ import (
 	"github.com/yanc0/collectd-http-server/plugins"
 )
 
+var pluginList []plugins.Plugin
+
+func loadPlugins() {
+	pluginList = append(pluginList, &plugins.PluginGraphite{})
+	pluginList = append(pluginList, &plugins.PluginConsole{})
+	log.Println("Pluging loaded")
+}
+
 func main() {
+	loadPlugins()
+
 	post, err := ioutil.ReadFile("./example.json")
 	if err != nil {
 		log.Fatal(err.Error())
@@ -20,6 +30,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	graphite := plugins.PluginGraphite{}
-	graphite.Send(metrics)
+	for _, p := range pluginList {
+		go p.Send(metrics)
+	}
 }
