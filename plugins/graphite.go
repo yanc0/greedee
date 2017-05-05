@@ -2,43 +2,104 @@ package plugins
 
 import (
 	"fmt"
-	"math"
 	"github.com/yanc0/collectd-http-server/collectd"
-	"github.com/marpaia/graphite-golang"
+	gr "github.com/marpaia/graphite-golang"
 	"errors"
-	"time"
+	"log"
 )
 
 
-type PluginGraphite struct {
-
+type GraphitePlugin struct {
+	Server *gr.Graphite
+	Config *GraphitePluginConfig
 }
 
-func (graphite *PluginGraphite) Send(cMetrics []collectd.CollectDMetric) error {
-	for _, cMetric := range cMetrics {
-		gMetrics, err := fromCollectDMetric(cMetric)
-		if err != nil {
-			return err
-		}
-		for _, gMetric := range gMetrics {
-			gMetric.print()
-		}
+type GraphitePluginConfig struct {
+	Active bool `yaml:"active"`
+	Host string `yaml:"host"`
+	Port int `yaml:"port"`
+	Protocol string `yaml:"protocol"`
+	Prefix string `yaml:"prefix"`
+}
+
+func NewGraphitePlugin(config *GraphitePluginConfig) *GraphitePlugin {
+	if config.Host == "" {
+		config.Host = "127.0.0.1"
 	}
+
+	if config.Port == 0 {
+		config.Port = 2003
+	}
+
+	if config.Protocol == "" {
+		config.Protocol = "tcp"
+	}
+
+	return &GraphitePlugin{
+		Config: config,
+	}
+}
+
+func (graphite *GraphitePlugin) Name() string {
+	return "Graphite"
+}
+
+func (graphite *GraphitePlugin) Init() error {
+	server, err := gr.GraphiteFactory(graphite.Config.Protocol,
+		graphite.Config.Host,
+		graphite.Config.Port,
+		graphite.Config.Prefix)
+	if err != nil {
+		log.Println("[WARN] Graphite", err.Error())
+	} else {
+		log.Println("[INFO] Graphite connection success")
+	}
+	graphite.Server = server
+	log.Println("[INFO] Graphite Plugin Initialized")
 	return nil
 }
 
-type graphiteMetric struct {
-	Name string `json:"name"`
-	Value float64 `json:"value"`
-	Timestamp time.Time `json:"time"`
+func (graphite *GraphitePlugin) Send(cMetrics []collectd.CollectDMetric) error {
+	var toSend []gr.Metric
+
+	if graphite.Server == nil{
+		log.Println("[WARN] Graphite is not connected, retrying...")
+
+		server, err := gr.NewGraphite("127.0.0.1", 2003)
+		if err != nil {
+			return err
+		}
+		graphite.Server = server
+		log.Println("[INFO] Graphite connection succeed")
+	}
+
+
+	for _, cMetric := range cMetrics {
+		gMetrics, err := fromCollectDMetric(cMetric)
+		if err != nil {
+			log.Println("[WARN]", err.Error())
+		} else {
+			for _, m := range gMetrics{
+				toSend = append(toSend, m)
+			}
+		}
+	}
+
+	err := graphite.Server.SendMetrics(toSend)
+	if err != nil {
+		log.Println("[WARN]", err.Error())
+		err = graphite.Server.Connect()
+		if err == nil {
+			log.Println("[INFO] Graphite connection success")
+			graphite.Server.SendMetrics(toSend)
+		}
+	}
+
+	return nil
 }
 
-func (gMetric graphiteMetric) print() {
-	fmt.Println(gMetric.Name, gMetric.Value, gMetric.Timestamp.Unix())
-}
-
-func fromCollectDMetric(cMetric collectd.CollectDMetric) ([]graphiteMetric, error) {
-	metrics := make([]graphiteMetric, len(cMetric.Values))
+func fromCollectDMetric(cMetric collectd.CollectDMetric) ([]gr.Metric, error) {
+	metrics := make([]gr.Metric, len(cMetric.Values))
 
 	if cMetric.Host == "" || cMetric.Plugin == "" || cMetric.Type == "" {
 		return nil, errors.New("Graphite Plugin: Invalid Collectd Metric")
@@ -58,17 +119,8 @@ func fromCollectDMetric(cMetric collectd.CollectDMetric) ([]graphiteMetric, erro
 		if dsName != "value" && dsName != "" {
 			metrics[i].Name = ident + "." + valueName
 		}
-		metrics[i].Value = cMetric.Values[i]
-		metrics[i].Timestamp = time.Unix(round(cMetric.Time), 0)
+		metrics[i].Value = fmt.Sprintf("%.4f", cMetric.Values[i])
+		metrics[i].Timestamp = int64(cMetric.Time)
 	}
 	return metrics, nil
 }
-
-
-func round(f float64) int64 {
-	if math.Abs(f) < 0.5 {
-		return 0
-	}
-	return int64(f + math.Copysign(0.5, f))
-}
-

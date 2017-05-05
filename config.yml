@@ -1,0 +1,12 @@
+---
+listen: "127.0.0.1"
+port: 9223
+
+graphite_plugin:
+  active: true
+  host: "graphite.host"
+  port: 2003
+  protocol: "tcp"
+
+console_plugin:
+  active: false

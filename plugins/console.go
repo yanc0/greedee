@@ -6,11 +6,31 @@ import (
 	"log"
 )
 
-type PluginConsole struct {
-
+type ConsolePlugin struct {
+	ConsolePluginConfig *ConsolePluginConfig
 }
 
-func (graphite *PluginConsole) Send(cMetrics []collectd.CollectDMetric) error {
+type ConsolePluginConfig struct {
+	Active bool `yaml:"active"`
+}
+
+func NewConsolePlugin(config *ConsolePluginConfig) *ConsolePlugin {
+	return &ConsolePlugin{
+		ConsolePluginConfig: config,
+	}
+}
+
+func (console *ConsolePlugin) Name() string {
+	return "Console"
+}
+
+
+func (console *ConsolePlugin) Init() error {
+	log.Println("[INFO] Console Plugin Initialized")
+	return nil
+}
+
+func (console *ConsolePlugin) Send(cMetrics []collectd.CollectDMetric) error {
 	for _, cMetric := range cMetrics {
 		identifier, err := cMetric.CollectDIdentifier()
 		if err != nil {

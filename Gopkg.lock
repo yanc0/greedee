@@ -1,7 +1,13 @@
-memo = "8c7ca6483deb5f586cb12cca34364f2258aa5da3867471549316027f446fb6ed"
+memo = "c84acc45621b94a8cca6c61888c2768416aabdd918068a36e71994838910a550"
 
 [[projects]]
   branch = "master"
   name = "github.com/marpaia/graphite-golang"
   packages = ["."]
   revision = "c474c9b821b4d0a4574edc6412b0003fbce233c4"
+
+[[projects]]
+  branch = "v2"
+  name = "gopkg.in/yaml.v2"
+  packages = ["."]
+  revision = "cd8b52f8269e0feb286dfeef29f8fe4d5b397e0b"
