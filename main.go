@@ -60,7 +60,7 @@ func loadPlugins(config *Config) {
 	if len(pluginList) < 1 {
 		log.Println("[WARN] No plugins loaded")
 	} else {
-		log.Println("[INFO] Plugins loaded")
+		log.Println("[INFO]", len(pluginList), "Plugins loaded")
 	}
 }
 
