@@ -39,6 +39,14 @@ func loadConfig(configPath string) {
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
+
+	if config.Listen == "" {
+		config.Listen = "127.0.0.1"
+	}
+
+	if config.Port == 0 {
+		config.Port = 9223
+	}
 }
 
 func loadPlugins(config *Config) {
