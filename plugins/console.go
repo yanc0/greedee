@@ -35,7 +35,7 @@ func (console *ConsolePlugin) Send(cMetrics []collectd.CollectDMetric) error {
 		if err != nil {
 			log.Println("[WARN] Console:", err.Error())
 		} else {
-			fmt.Println("Console Plugin:", identifier)
+			fmt.Println("Console Plugin:", identifier, cMetric.Values)
 		}
 	}
 	return nil

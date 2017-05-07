@@ -18,6 +18,7 @@ type BasicAuth struct {
 	Active   bool     `toml:"active"`
 	Accounts []string `toml:"accounts"`
 }
+
 type Config struct {
 	Listen         string                        `toml:"listen"`
 	Port           int                           `toml:"port"`
@@ -47,7 +48,12 @@ func loadPlugins(config *Config) {
 	if config.ConsolePlugin != nil && config.ConsolePlugin.Active {
 		pluginList = append(pluginList, plugins.NewConsolePlugin(config.ConsolePlugin))
 	}
-	log.Println("[INFO] Plugins loaded")
+
+	if len(pluginList) < 1 {
+		log.Println("[WARN] No plugins loaded")
+	} else {
+		log.Println("[INFO] Plugins loaded")
+	}
 }
 
 func initPlugins() {
@@ -61,7 +67,7 @@ func initPlugins() {
 
 func main() {
 	configPath := flag.String("configPath",
-		"/etc/collectd-http-server/config.yaml",
+		"/etc/collectd-http-server/config.toml",
 		"Config path")
 	flag.Parse()
 

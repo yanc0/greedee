@@ -11,7 +11,7 @@ import (
 
 func auth(fn http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		if config.BasicAuth.Active == true {
+		if config.BasicAuth != nil && config.BasicAuth.Active == true {
 			user, pass, _ := r.BasicAuth()
 			if !check(user, pass) {
 				http.Error(w, "401, Unauthorized", 401)

@@ -1,3 +1,4 @@
+# Collectd HTTP Server Config
 listen = "127.0.0.1"
 port = 9223
 
