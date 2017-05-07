@@ -1,29 +1,32 @@
 package main
 
 import (
+	"flag"
+	"fmt"
+	"github.com/BurntSushi/toml"
+	"github.com/yanc0/collectd-http-server/plugins"
 	"io/ioutil"
 	"log"
-	"encoding/json"
-	"github.com/yanc0/collectd-http-server/collectd"
-	"github.com/yanc0/collectd-http-server/plugins"
 	"net/http"
-	"flag"
-	"gopkg.in/yaml.v2"
 	"os"
-	"fmt"
 )
 
 var pluginList []plugins.Plugin
+var config Config
 
+type BasicAuth struct {
+	Active   bool     `toml:"active"`
+	Accounts []string `toml:"accounts"`
+}
 type Config struct {
-	Listen string `yaml:"listen"`
-	Port int `yaml:"port"`
-	GraphitePlugin *plugins.GraphitePluginConfig `yaml:"graphite_plugin"`
-	ConsolePlugin  *plugins.ConsolePluginConfig `yaml:"console_plugin"`
+	Listen         string                        `toml:"listen"`
+	Port           int                           `toml:"port"`
+	BasicAuth      *BasicAuth                    `toml:"basic_auth"`
+	GraphitePlugin *plugins.GraphitePluginConfig `toml:"graphite_plugin"`
+	ConsolePlugin  *plugins.ConsolePluginConfig  `toml:"console_plugin"`
 }
 
-func loadConfig(configPath string) *Config {
-	var config Config
+func loadConfig(configPath string) {
 	configPath = os.ExpandEnv(configPath)
 
 	configStr, err := ioutil.ReadFile(configPath)
@@ -31,15 +34,14 @@ func loadConfig(configPath string) *Config {
 		log.Fatalln(err.Error())
 	}
 
-	err = yaml.Unmarshal(configStr, &config)
+	err = toml.Unmarshal(configStr, &config) //global config
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
-	return &config
 }
 
 func loadPlugins(config *Config) {
-	if config.GraphitePlugin != nil && config.GraphitePlugin.Active{
+	if config.GraphitePlugin != nil && config.GraphitePlugin.Active {
 		pluginList = append(pluginList, plugins.NewGraphitePlugin(config.GraphitePlugin))
 	}
 	if config.ConsolePlugin != nil && config.ConsolePlugin.Active {
@@ -63,44 +65,12 @@ func main() {
 		"Config path")
 	flag.Parse()
 
-	config := loadConfig(*configPath)
-	listen := fmt.Sprintf("%s:%d", config.Listen, config.Port)
-	gr := config.GraphitePlugin
-
-	fmt.Println(gr)
-
-	loadPlugins(config)
+	loadConfig(*configPath)
+	loadPlugins(&config)
 	initPlugins()
 
+	listen := fmt.Sprintf("%s:%d", config.Listen, config.Port)
 
-
-	http.HandleFunc("/", handlerMetricPost)
+	http.HandleFunc("/", auth(handlerMetricPost))
 	log.Fatal(http.ListenAndServe(listen, nil))
-}
-
-func handlerMetricPost(w http.ResponseWriter, req *http.Request){
-	if req.Method != "POST" {
-		http.Error(w, "405 Method Not Allowed - POST Only", http.StatusMethodNotAllowed)
-		return
-	}
-
-	post, err := ioutil.ReadAll(req.Body)
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-	defer req.Body.Close()
-
-	var metrics []collectd.CollectDMetric
-	err = json.Unmarshal(post, &metrics)
-	if err != nil {
-		log.Println("[WARN]", err.Error())
-	}
-
-	for _, p := range pluginList {
-		err := p.Send(metrics)
-		if err != nil {
-			log.Println("[WARN]", err.Error())
-		}
-	}
-	return
 }

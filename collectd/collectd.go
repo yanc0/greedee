@@ -5,17 +5,17 @@ import (
 )
 
 type CollectDMetric struct {
-	Host string `json:"host"`
-	Plugin string `json:"plugin"`
-	PluginInstance string`json:"plugin_instance"`
-	Type string `json:"type"`
-	TypeInstance string `json:"type_instance"`
-	Time float64 `json:"time"`
-	Interval int `json:"interval"`
-	DSTypes []string `json:"dstypes"`
-	DSNames []string `json:"dsnames"`
-	Values []float64 `json:"values"`
-	Meta map[string]string `json:"meta"`
+	Host           string            `json:"host"`
+	Plugin         string            `json:"plugin"`
+	PluginInstance string            `json:"plugin_instance"`
+	Type           string            `json:"type"`
+	TypeInstance   string            `json:"type_instance"`
+	Time           float64           `json:"time"`
+	Interval       int               `json:"interval"`
+	DSTypes        []string          `json:"dstypes"`
+	DSNames        []string          `json:"dsnames"`
+	Values         []float64         `json:"values"`
+	Meta           map[string]string `json:"meta"`
 }
 
 func (cMetric *CollectDMetric) CollectDIdentifier() (string, error) {
@@ -33,4 +33,3 @@ func (cMetric *CollectDMetric) CollectDIdentifier() (string, error) {
 	}
 	return ident, nil
 }
-

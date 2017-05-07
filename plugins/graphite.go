@@ -1,13 +1,12 @@
 package plugins
 
 import (
-	"fmt"
-	"github.com/yanc0/collectd-http-server/collectd"
-	gr "github.com/marpaia/graphite-golang"
 	"errors"
+	"fmt"
+	gr "github.com/marpaia/graphite-golang"
+	"github.com/yanc0/collectd-http-server/collectd"
 	"log"
 )
-
 
 type GraphitePlugin struct {
 	Server *gr.Graphite
@@ -15,11 +14,11 @@ type GraphitePlugin struct {
 }
 
 type GraphitePluginConfig struct {
-	Active bool `yaml:"active"`
-	Host string `yaml:"host"`
-	Port int `yaml:"port"`
-	Protocol string `yaml:"protocol"`
-	Prefix string `yaml:"prefix"`
+	Active bool   `toml:"active"`
+	Host   string `toml:"host"`
+	Port   int    `toml:"port"`
+	Proto  string `toml:"proto"`
+	Prefix string `toml:"prefix"`
 }
 
 func NewGraphitePlugin(config *GraphitePluginConfig) *GraphitePlugin {
@@ -31,8 +30,8 @@ func NewGraphitePlugin(config *GraphitePluginConfig) *GraphitePlugin {
 		config.Port = 2003
 	}
 
-	if config.Protocol == "" {
-		config.Protocol = "tcp"
+	if config.Proto == "" {
+		config.Proto = "tcp"
 	}
 
 	return &GraphitePlugin{
@@ -45,41 +44,49 @@ func (graphite *GraphitePlugin) Name() string {
 }
 
 func (graphite *GraphitePlugin) Init() error {
-	server, err := gr.GraphiteFactory(graphite.Config.Protocol,
+	err := graphite.Connect()
+	if err != nil {
+		log.Println("[WARN] Graphite", err.Error())
+	}
+	log.Println("[INFO] Graphite Plugin Initialized")
+	return nil
+}
+
+func (graphite *GraphitePlugin) Connect() error {
+	if graphite.Config == nil {
+		return errors.New("Graphite config not set")
+	}
+	server, err := gr.GraphiteFactory(graphite.Config.Proto,
 		graphite.Config.Host,
 		graphite.Config.Port,
 		graphite.Config.Prefix)
 	if err != nil {
-		log.Println("[WARN] Graphite", err.Error())
+		return err
 	} else {
-		log.Println("[INFO] Graphite connection success")
+		log.Println("[INFO] Graphite connection succeed")
 	}
 	graphite.Server = server
-	log.Println("[INFO] Graphite Plugin Initialized")
 	return nil
 }
 
 func (graphite *GraphitePlugin) Send(cMetrics []collectd.CollectDMetric) error {
 	var toSend []gr.Metric
 
-	if graphite.Server == nil{
+	if graphite.Server == nil {
 		log.Println("[WARN] Graphite is not connected, retrying...")
-
-		server, err := gr.NewGraphite("127.0.0.1", 2003)
+		err := graphite.Connect()
 		if err != nil {
 			return err
 		}
-		graphite.Server = server
 		log.Println("[INFO] Graphite connection succeed")
 	}
-
 
 	for _, cMetric := range cMetrics {
 		gMetrics, err := fromCollectDMetric(cMetric)
 		if err != nil {
 			log.Println("[WARN]", err.Error())
 		} else {
-			for _, m := range gMetrics{
+			for _, m := range gMetrics {
 				toSend = append(toSend, m)
 			}
 		}

@@ -1,4 +1,10 @@
-memo = "c84acc45621b94a8cca6c61888c2768416aabdd918068a36e71994838910a550"
+memo = "e45dfadad332bc7de018b5e3cfd1892e9606f565eea347ccefb6f69febce0d17"
+
+[[projects]]
+  name = "github.com/BurntSushi/toml"
+  packages = ["."]
+  revision = "b26d9c308763d68093482582cea63d69be07a0f0"
+  version = "v0.3.0"
 
 [[projects]]
   branch = "master"

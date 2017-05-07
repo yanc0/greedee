@@ -1,0 +1,17 @@
+listen = "127.0.0.1"
+port = 9223
+
+[basic_auth]
+active = false
+accounts = [
+  "user:pass",
+]
+
+[graphite_plugin]
+active = true
+host = "127.0.0.1"
+port = 2003
+proto = "tcp"
+
+[console_plugin]
+active = false

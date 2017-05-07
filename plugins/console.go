@@ -1,8 +1,8 @@
 package plugins
 
 import (
-	"github.com/yanc0/collectd-http-server/collectd"
 	"fmt"
+	"github.com/yanc0/collectd-http-server/collectd"
 	"log"
 )
 
@@ -23,7 +23,6 @@ func NewConsolePlugin(config *ConsolePluginConfig) *ConsolePlugin {
 func (console *ConsolePlugin) Name() string {
 	return "Console"
 }
-
 
 func (console *ConsolePlugin) Init() error {
 	log.Println("[INFO] Console Plugin Initialized")
