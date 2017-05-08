@@ -13,6 +13,7 @@ import (
 
 var pluginList []plugins.Plugin
 var config Config
+var counter int64
 
 type BasicAuth struct {
 	Active   bool     `toml:"active"`
@@ -70,6 +71,8 @@ func initPlugins() {
 		if err != nil {
 			log.Fatalln("[FATAL]", p.Name(), err.Error())
 		}
+		log.Println("[INFO]", p.Name(), "Plugin Initialized")
+
 	}
 }
 

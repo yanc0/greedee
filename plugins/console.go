@@ -25,7 +25,6 @@ func (console *ConsolePlugin) Name() string {
 }
 
 func (console *ConsolePlugin) Init() error {
-	log.Println("[INFO] Console Plugin Initialized")
 	return nil
 }
 

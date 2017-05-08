@@ -2,10 +2,10 @@ package plugins
 
 import (
 	"errors"
-	"fmt"
 	gr "github.com/marpaia/graphite-golang"
 	"github.com/yanc0/collectd-http-server/collectd"
 	"log"
+	"strconv"
 )
 
 type GraphitePlugin struct {
@@ -48,7 +48,6 @@ func (graphite *GraphitePlugin) Init() error {
 	if err != nil {
 		log.Println("[WARN] Graphite", err.Error())
 	}
-	log.Println("[INFO] Graphite Plugin Initialized")
 	return nil
 }
 
@@ -71,14 +70,12 @@ func (graphite *GraphitePlugin) Connect() error {
 
 func (graphite *GraphitePlugin) Send(cMetrics []collectd.CollectDMetric) error {
 	var toSend []gr.Metric
-
 	if graphite.Server == nil {
 		log.Println("[WARN] Graphite is not connected, retrying...")
 		err := graphite.Connect()
 		if err != nil {
 			return err
 		}
-		log.Println("[INFO] Graphite connection succeed")
 	}
 
 	for _, cMetric := range cMetrics {
@@ -111,6 +108,9 @@ func fromCollectDMetric(cMetric collectd.CollectDMetric) ([]gr.Metric, error) {
 	if cMetric.Host == "" || cMetric.Plugin == "" || cMetric.Type == "" {
 		return nil, errors.New("Graphite Plugin: Invalid Collectd Metric")
 	}
+
+	// Construct graphite identifier according to
+	// https://collectd.org/wiki/index.php/Naming_schema
 	ident := cMetric.Host
 	ident = ident + "." + cMetric.Plugin
 	if cMetric.PluginInstance != "" {
@@ -126,7 +126,7 @@ func fromCollectDMetric(cMetric collectd.CollectDMetric) ([]gr.Metric, error) {
 		if dsName != "value" && dsName != "" {
 			metrics[i].Name = ident + "." + valueName
 		}
-		metrics[i].Value = fmt.Sprintf("%.4f", cMetric.Values[i])
+		metrics[i].Value = strconv.FormatFloat(cMetric.Values[i], 'f', -1, 64)
 		metrics[i].Timestamp = int64(cMetric.Time)
 	}
 	return metrics, nil

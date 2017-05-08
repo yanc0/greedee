@@ -7,6 +7,8 @@ import (
 	"log"
 	"net/http"
 	"strings"
+	"sync"
+	"github.com/yanc0/collectd-http-server/plugins"
 )
 
 func auth(fn http.HandlerFunc) http.HandlerFunc {
@@ -14,6 +16,11 @@ func auth(fn http.HandlerFunc) http.HandlerFunc {
 		if config.BasicAuth != nil && config.BasicAuth.Active == true {
 			user, pass, _ := r.BasicAuth()
 			if !check(user, pass) {
+				if user == "" {
+					user = "nil"
+				}
+				log.Println("[INFO] Unauthorized (", user, ")")
+				w.Header().Add("WWW-Authenticate", "Basic realm=\"Access Denied\"")
 				http.Error(w, "401, Unauthorized", 401)
 				return
 			}
@@ -43,7 +50,6 @@ func handlerMetricPost(w http.ResponseWriter, req *http.Request) {
 		log.Fatal(err.Error())
 	}
 	defer req.Body.Close()
-
 	var metrics []collectd.CollectDMetric
 	err = json.Unmarshal(post, &metrics)
 	if err != nil {
@@ -51,12 +57,18 @@ func handlerMetricPost(w http.ResponseWriter, req *http.Request) {
 		http.Error(w, "400, Invalid JSON", http.StatusBadRequest)
 		return
 	}
-
+	// Asynchronously send metrics to plugins
+	var wg sync.WaitGroup
 	for _, p := range pluginList {
-		err := p.Send(metrics)
-		if err != nil {
-			log.Println("[WARN]", err.Error())
-		}
+		wg.Add(1)
+		go func(p plugins.Plugin,metrics []collectd.CollectDMetric) {
+			err := p.Send(metrics)
+			if err != nil {
+				log.Println("[WARN]", err.Error())
+			}
+			wg.Done()
+		}(p, metrics)
 	}
+	wg.Wait()
 	return
 }

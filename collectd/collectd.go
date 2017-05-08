@@ -11,7 +11,7 @@ type CollectDMetric struct {
 	Type           string            `json:"type"`
 	TypeInstance   string            `json:"type_instance"`
 	Time           float64           `json:"time"`
-	Interval       int               `json:"interval"`
+	Interval       float64           `json:"interval"`
 	DSTypes        []string          `json:"dstypes"`
 	DSNames        []string          `json:"dsnames"`
 	Values         []float64         `json:"values"`
