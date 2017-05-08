@@ -3,7 +3,7 @@ listen = "127.0.0.1"
 port = 9223
 
 [basic_auth]
-active = false
+active = true
 accounts = [
   "user:pass",
 ]
