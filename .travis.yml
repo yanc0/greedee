@@ -1,0 +1,11 @@
+language: go
+go:
+- 1.8
+deploy:
+  provider: releases
+  api_key:
+    secure: KmlG07Qtn8XnfX09MuuU2pLfYFeP2uH65lm8z9j9KFUQqAszOvQGUCMxpUVNDN8I+IQrGm4LYF6CDbwROoZK/tknH+dk69zY78jPvZyAKoWd/SXhpav6OF7xzddm8P+G+VPuAYUvo7b94klnDfm/AWFLAG+7LRJSXYH48vrm7OZs324xWv+nzAR5QxMpNhiojeY3zVQJcB/b1i5w1/Gng8U76PSisEFwhrPBj9rtk3AfAHVNuxpuarE0eQFUeAUJcirL3cY9MSF8u1ZwAbbvOAI47OYmQeuZ8mHnZWJ8ID0zOUCPEsejsVbE9u6fs+EM0El15i3c6AawGPibDh++miccmpAzXEVSlGgR7Xw6Mc0bgYo1/Y05NiL8Vl3tK+yR9+4oKLQL1cbkKmw+gpdiNbopYNIyyaUAmfMUrbaVF8JBtjoSn8KJjhIXHbBk99Ws96QJ5UM2eklAZQfKIFFMAoR8HOENtOZRvKIz5y+pbn6yvoawNr20EMH0kOoBnAxWk+xZABU9shuUxzMoLHBfNn/kWjTXvCJbhciSglH7nzELgABNc/AQ1rQtmDW7NhXX4DDmK3cYPjBuRbARGZWMu1sB6MVKGt0ivu/bf+INmRpiTGpAc4g5f4OHm3zKz2Qw3eXtfpexRUvKfInw8bZV+Onn4jifuBeOruCBzSevJuw=
+  file: collectd-http-server
+  on:
+    repo: yanc0/collectd-http-server
+tags: true
