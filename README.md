@@ -1,9 +1,15 @@
-# collectd-http-server
+# Greedy
 Fast and Modular Collectd HTTP Gateway
+
+> Greedee swims over the internets to eat small metrics
+
+![greedy](greedee.png)
+
+[![Build Status](https://travis-ci.org/yanc0/greedee.svg?branch=master)](https://travis-ci.org/yanc0/greedee)
 
 ## How it work?
 
-Collectd HTTP Server is a fast HTTP Gateway for collectd's 
+Greedee is a fast HTTP Gateway for collectd's 
 `write_http` plugin. It is very modular and can be very easily
 enhanced.
 
@@ -13,12 +19,12 @@ It supports:
 * Graphite Backend
 * Console Backend (debug)
 
-## Install
+## Install
 
 * Download latest release on [release page]("https://github.com/yanc0/collectd-http-server/releases")
-* Move it on `/usr/bin/collectd-http-server`
-* Configure it on `/etc/collectd-http-server/config.toml` [example here](config.toml)
-* Run it by executing the collectd-http-server binary
+* Move it on `/usr/bin/greedee`
+* Configure it on `/etc/greedee/config.toml` [example here](config.toml)
+* Run it by executing the greedee binary
 * Install collectd (tested on 5.7.1 but should work with not 
 too old previous version).
 * Load and configure plugin `write_http` in JSON
@@ -29,14 +35,14 @@ Output [Official docs here](https://collectd.org/wiki/index.php/Plugin:Write_HTT
 Ensure your 1.8+ Golang environment is properly setup
 
 ```
-go get -u github.com/yanc0/collectd-http-server
-cd $GOPATH/src/github.com/yanc0/collectd-http-server
+go get -u github.com/yanc0/greedee
+cd $GOPATH/src/github.com/yanc0/greedee
 make setup
 make build
 ```
 ## Changelog
 
-### Unreleased - 2017-05-08
+### v0.1.0 - 2017-05-08
 
 * Plugins
   * Graphite
@@ -80,3 +86,4 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
+
