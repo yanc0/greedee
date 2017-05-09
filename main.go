@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/BurntSushi/toml"
-	"github.com/yanc0/collectd-http-server/plugins"
+	"github.com/yanc0/greedee/plugins"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -77,8 +77,8 @@ func initPlugins() {
 }
 
 func main() {
-	configPath := flag.String("configPath",
-		"/etc/collectd-http-server/config.toml",
+	configPath := flag.String("config",
+		"/etc/greedee/config.toml",
 		"Config path")
 	flag.Parse()
 

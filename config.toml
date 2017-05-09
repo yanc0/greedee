@@ -1,4 +1,5 @@
-# Collectd HTTP Server Config
+# Greedee Config
+
 listen = "127.0.0.1"
 port = 9223
 

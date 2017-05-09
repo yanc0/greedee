@@ -3,7 +3,7 @@ package plugins
 import (
 	"errors"
 	gr "github.com/marpaia/graphite-golang"
-	"github.com/yanc0/collectd-http-server/collectd"
+	"github.com/yanc0/greedee/collectd"
 	"log"
 	"strconv"
 )

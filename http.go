@@ -2,13 +2,13 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/yanc0/collectd-http-server/collectd"
+	"github.com/yanc0/greedee/collectd"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"strings"
 	"sync"
-	"github.com/yanc0/collectd-http-server/plugins"
+	"github.com/yanc0/greedee/plugins"
 )
 
 func auth(fn http.HandlerFunc) http.HandlerFunc {
