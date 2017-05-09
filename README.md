@@ -1,4 +1,4 @@
-# Greedy
+# Greedee
 Fast and Modular Collectd HTTP Gateway
 
 > Greedee swims over the internets to eat small metrics
