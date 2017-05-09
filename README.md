@@ -42,7 +42,7 @@ make build
 ```
 ## Changelog
 
-### v0.1.0 - 2017-05-08
+### v0.1.0 - 2017-05-08
 
 * Plugins
   * Graphite
