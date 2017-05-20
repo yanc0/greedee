@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.1 r15371"
+   sodipodi:docname="requin-baleine.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1"
+     inkscape:cx="396.7619"
+     inkscape:cy="539.69133"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer8"
+     showgrid="true"
+     showguides="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid5067" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="nageoires">
+    <path
+       style="fill:#001978;fill-opacity:1;stroke-width:1.43964827"
+       d="M 149.71154,124.75707 V 152.244 l 22.89067,-17.16754 v -10.31939 z"
+       id="rect75-7"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <path
+       style="fill:#001978;fill-opacity:1;stroke-width:1.43964827"
+       d="M 65.738369,124.75707 V 152.244 L 42.847696,135.07646 v -10.31939 z"
+       id="rect75-7-6"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="corps"
+     style="display:inline">
+    <path
+       style="fill:#6396b4;fill-opacity:1;stroke-width:3.92730379"
+       d="M 407.15234 297.31445 L 244.17969 413.97461 L 244.10352 413.97461 L 244.10352 414.0293 L 244.10352 428.38477 L 244.10352 562.31055 L 244.10352 605.89453 L 244.12109 605.89453 L 306.85938 670.51367 L 508.39258 670.36523 L 569.92578 605.89453 L 570.19531 605.89453 L 570.19531 562.31055 L 570.19531 414.0293 L 407.15234 297.31445 z "
+       transform="scale(0.26458333)"
+       id="path53"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628" />
+  </g>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:inline" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer8"
+     inkscape:label="points"
+     style="display:inline">
+    <ellipse
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.57619947"
+       id="path4958-2"
+       cx="91.504906"
+       cy="150.05745"
+       rx="1.4404987"
+       ry="1.3684739"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <ellipse
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.57619947"
+       id="path4958-2-0"
+       cx="100.2977"
+       cy="150.11714"
+       rx="1.4404987"
+       ry="1.3684739"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <ellipse
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.57619947"
+       id="path4958-2-2"
+       cx="108.88327"
+       cy="150.09248"
+       rx="1.4404987"
+       ry="1.3684739"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <ellipse
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.57619947"
+       id="path4958-2-3"
+       cx="117.36098"
+       cy="150.09866"
+       rx="1.4404987"
+       ry="1.3684739"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <ellipse
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.57619947"
+       id="path4958-2-3-6"
+       cx="125.88215"
+       cy="150.02875"
+       rx="1.4404987"
+       ry="1.3684739"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <ellipse
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.57619947"
+       id="path4958-2-0-2"
+       cx="100.2977"
+       cy="142.05022"
+       rx="1.4404987"
+       ry="1.3684739"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <ellipse
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.57619947"
+       id="path4958-2-3-3"
+       cx="117.36098"
+       cy="142.03174"
+       rx="1.4404987"
+       ry="1.3684739"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <ellipse
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.57619947"
+       id="path4958-2-1-9"
+       cx="74.507027"
+       cy="133.49147"
+       rx="1.4404987"
+       ry="1.3684739"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <ellipse
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.57619947"
+       id="path4958-2-0-2-4"
+       cx="91.510651"
+       cy="133.55115"
+       rx="1.4404987"
+       ry="1.3684739"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <ellipse
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.57619947"
+       id="path4958-2-2-9-7"
+       cx="108.88327"
+       cy="133.38243"
+       rx="1.4404987"
+       ry="1.3684739"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <ellipse
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.57619947"
+       id="path4958-2-3-3-8"
+       cx="126.43613"
+       cy="133.38861"
+       rx="1.4404987"
+       ry="1.3684739"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <ellipse
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.57619947"
+       id="path4958-2-3-6-1-4"
+       cx="143.02409"
+       cy="133.75085"
+       rx="1.4404987"
+       ry="1.3684739"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <ellipse
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.57619947"
+       id="path4958-2-1-5"
+       cx="82.285774"
+       cy="141.99054"
+       rx="1.4404987"
+       ry="1.3684739"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <ellipse
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.57619947"
+       id="path4958-2-3-6-1-0"
+       cx="135.10123"
+       cy="141.96182"
+       rx="1.4404987"
+       ry="1.3684739"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <ellipse
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.57619947"
+       id="path4958-2-0-2-6"
+       cx="100.23109"
+       cy="124.56065"
+       rx="1.4404987"
+       ry="1.3684739"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <ellipse
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.57619947"
+       id="path4958-2-3-3-0"
+       cx="117.29442"
+       cy="124.54217"
+       rx="1.4404987"
+       ry="1.3684739"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <ellipse
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.57619947"
+       id="path4958-2-1-5-3"
+       cx="82.218925"
+       cy="124.50095"
+       rx="1.4404987"
+       ry="1.3684739"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <ellipse
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.57619947"
+       id="path4958-2-3-6-1-0-2"
+       cx="135.03465"
+       cy="124.47225"
+       rx="1.4404987"
+       ry="1.3684739"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <ellipse
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.57619947"
+       id="path4958-2-1-9-0"
+       cx="74.507072"
+       cy="116.2809"
+       rx="1.4404987"
+       ry="1.3684739"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <ellipse
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.57619947"
+       id="path4958-2-0-2-4-6"
+       cx="91.636444"
+       cy="116.2809"
+       rx="1.4404987"
+       ry="1.3684739"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <ellipse
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.57619947"
+       id="path4958-2-2-9-7-1"
+       cx="108.76581"
+       cy="116.2809"
+       rx="1.4404987"
+       ry="1.3684739"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <ellipse
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.57619947"
+       id="path4958-2-3-3-8-5"
+       cx="125.89519"
+       cy="116.2809"
+       rx="1.4404987"
+       ry="1.3684739"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <ellipse
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.57619947"
+       id="path4958-2-3-6-1-4-5"
+       cx="143.02455"
+       cy="116.2809"
+       rx="1.4404987"
+       ry="1.3684739"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <ellipse
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.57619947"
+       id="path4958-2-0-2-4-6-7"
+       cx="90.934677"
+       cy="105.89417"
+       rx="1.4404987"
+       ry="1.3684739"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <ellipse
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.57619947"
+       id="path4958-2-2-9-7-1-6"
+       cx="108.30772"
+       cy="105.72547"
+       rx="1.4404987"
+       ry="1.3684739"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <ellipse
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.57619947"
+       id="path4958-2-3-3-8-5-5"
+       cx="125.86058"
+       cy="105.73165"
+       rx="1.4404987"
+       ry="1.3684739"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <ellipse
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.57619947"
+       id="path4958-2-2-9-7-1-6-9"
+       cx="108.30772"
+       cy="94.201637"
+       rx="1.4404987"
+       ry="1.3684739"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer6"
+     inkscape:label="yeux"
+     style="display:inline">
+    <ellipse
+       style="display:inline;fill:#001978;fill-opacity:1;stroke-width:0.57619947"
+       id="path4958-2-5"
+       cx="74.359947"
+       cy="163.88644"
+       rx="1.4404987"
+       ry="1.3684739"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <ellipse
+       style="display:inline;fill:#001978;fill-opacity:1;stroke-width:0.57619947"
+       id="path4958-2-5-8"
+       cx="140.19017"
+       cy="163.88626"
+       rx="1.4404987"
+       ry="1.3684739"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer7"
+     inkscape:label="branchies">
+    <rect
+       style="display:inline;fill:#001978;fill-opacity:1;stroke-width:0.57619947"
+       id="rect4891"
+       width="20.080704"
+       height="2.3281975"
+       x="64.58596"
+       y="148.83333"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <rect
+       style="display:inline;fill:#001978;fill-opacity:1;stroke-width:0.37838376"
+       id="rect4891-6"
+       width="8.6596069"
+       height="2.3281975"
+       x="64.58596"
+       y="141.87218"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <rect
+       style="display:inline;fill:#001978;fill-opacity:1;stroke-width:0.47951508"
+       id="rect4891-6-1"
+       width="13.907138"
+       height="2.3281975"
+       x="64.58596"
+       y="145.35275"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <rect
+       style="display:inline;fill:#001978;fill-opacity:1;stroke-width:0.57619947"
+       id="rect4891-8"
+       width="20.080704"
+       height="2.3281975"
+       x="-150.86394"
+       y="148.76208"
+       transform="scale(-1,1)"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <rect
+       style="display:inline;fill:#001978;fill-opacity:1;stroke-width:0.37838376"
+       id="rect4891-6-7"
+       width="8.6596069"
+       height="2.3281975"
+       x="-150.86394"
+       y="141.80092"
+       transform="scale(-1,1)"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+    <rect
+       style="display:inline;fill:#001978;fill-opacity:1;stroke-width:0.47951508"
+       id="rect4891-6-1-9"
+       width="13.907138"
+       height="2.3281975"
+       x="-150.86394"
+       y="145.28151"
+       transform="scale(-1,1)"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer5"
+     inkscape:label="bouche">
+    <path
+       style="display:inline;fill:#001978;fill-opacity:1;stroke-width:0.52835196"
+       d="m 81.110053,166.03227 6.463114,9.03014 h 14.632313 11.31241 13.47092 l 7.52323,-9.03014 h -24.90374 -7.40282 z"
+       id="rect1058-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="58.72628"
+       inkscape:export-ydpi="58.72628"
+       inkscape:export-filename="/home/yann/Gopath/src/github.com/yanc0/greedee/greedee.png" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="yeuxkawai"
+     style="display:none"
+     sodipodi:insensitive="true">
+    <path
+       style="fill:#f2f2f2;fill-opacity:1;stroke-width:0.17094448"
+       d="m 144.69251,264.17738 -2.80606,2.67768 0.46141,0.44063 2.2575,-2.15422 2.34431,2.23706 0.5489,-0.52347 z"
+       id="rect1178"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#f2f2f2;fill-opacity:1;stroke-width:0.17094448"
+       d="m 115.0029,264.26022 -2.80606,2.67768 0.46141,0.44063 2.2575,-2.15422 2.34431,2.23706 0.5489,-0.52347 z"
+       id="rect1178-2"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>
