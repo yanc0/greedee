@@ -46,7 +46,7 @@ func (graphite *GraphitePlugin) Name() string {
 func (graphite *GraphitePlugin) Init() error {
 	err := graphite.Connect()
 	if err != nil {
-		log.Println("[WARN] Graphite", err.Error())
+		return err
 	}
 	return nil
 }

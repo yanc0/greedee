@@ -11,9 +11,9 @@ import (
 	"os"
 )
 
-var pluginList []plugins.Plugin
+var metricPluginList 	    []plugins.MetricPlugin
+var eventPluginList []plugins.EventPlugin
 var config Config
-var counter int64
 
 type BasicAuth struct {
 	Active   bool     `toml:"active"`
@@ -26,6 +26,7 @@ type Config struct {
 	BasicAuth      *BasicAuth                    `toml:"basic_auth"`
 	GraphitePlugin *plugins.GraphitePluginConfig `toml:"graphite_plugin"`
 	ConsolePlugin  *plugins.ConsolePluginConfig  `toml:"console_plugin"`
+	MySQLPlugin    *plugins.MySQLPluginConfig    `toml:"mysql_plugin"`
 }
 
 func loadConfig(configPath string) {
@@ -51,29 +52,46 @@ func loadConfig(configPath string) {
 }
 
 func loadPlugins(config *Config) {
+	// Metrics Plugins
 	if config.GraphitePlugin != nil && config.GraphitePlugin.Active {
-		pluginList = append(pluginList, plugins.NewGraphitePlugin(config.GraphitePlugin))
+		metricPluginList = append(metricPluginList, plugins.NewGraphitePlugin(config.GraphitePlugin))
 	}
 	if config.ConsolePlugin != nil && config.ConsolePlugin.Active {
-		pluginList = append(pluginList, plugins.NewConsolePlugin(config.ConsolePlugin))
+		metricPluginList = append(metricPluginList, plugins.NewConsolePlugin(config.ConsolePlugin))
 	}
 
-	if len(pluginList) < 1 {
+	//Events Plugins
+	if config.MySQLPlugin != nil && config.MySQLPlugin.Active {
+		eventPluginList = append(eventPluginList, plugins.NewMySQLPlugin(config.MySQLPlugin))
+	}
+	if len(metricPluginList) < 1 {
 		log.Println("[WARN] No plugins loaded")
 	} else {
-		log.Println("[INFO]", len(pluginList), "Plugins loaded")
+		log.Println("[INFO]", len(metricPluginList) + len(eventPluginList), "Plugins loaded")
 	}
 }
 
 func initPlugins() {
-	for _, p := range pluginList {
+	for _, p := range metricPluginList {
 		err := p.Init()
 		if err != nil {
-			log.Fatalln("[FATAL]", p.Name(), err.Error())
+			log.Println("[WARN]", p.Name(), err.Error())
+		} else {
+			log.Println("[INFO]", p.Name(), "Plugin Initialized")
 		}
-		log.Println("[INFO]", p.Name(), "Plugin Initialized")
 
 	}
+
+	for _, p := range eventPluginList {
+		err := p.Init()
+		if err != nil {
+			log.Println("[WARN]", p.Name(), err.Error())
+		} else {
+			log.Println("[INFO]", p.Name(), "Plugin Initialized")
+		}
+
+	}
+
 }
 
 func main() {
@@ -88,6 +106,7 @@ func main() {
 
 	listen := fmt.Sprintf("%s:%d", config.Listen, config.Port)
 
-	http.HandleFunc("/", auth(handlerMetricPost))
+	http.HandleFunc("/metrics", auth(handlerMetricPost))
+	http.HandleFunc("/events", auth(handlerEventPost))
 	log.Fatal(http.ListenAndServe(listen, nil))
 }
