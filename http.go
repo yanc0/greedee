@@ -9,6 +9,8 @@ import (
 	"strings"
 	"sync"
 	"github.com/yanc0/greedee/plugins"
+	"github.com/yanc0/greedee/events"
+	"time"
 )
 
 func auth(fn http.HandlerFunc) http.HandlerFunc {
@@ -59,15 +61,64 @@ func handlerMetricPost(w http.ResponseWriter, req *http.Request) {
 	}
 	// Asynchronously send metrics to plugins
 	var wg sync.WaitGroup
-	for _, p := range pluginList {
+	for _, p := range metricPluginList {
 		wg.Add(1)
-		go func(p plugins.Plugin,metrics []collectd.CollectDMetric) {
+		go func(p plugins.MetricPlugin, metrics []collectd.CollectDMetric) {
 			err := p.Send(metrics)
 			if err != nil {
 				log.Println("[WARN]", err.Error())
 			}
 			wg.Done()
 		}(p, metrics)
+	}
+	wg.Wait()
+	return
+}
+
+func handlerEventPost(w http.ResponseWriter, req *http.Request) {
+	if req.Method != "POST" {
+		http.Error(w, "405 Method Not Allowed - POST Only", http.StatusMethodNotAllowed)
+		return
+	}
+
+	post, err := ioutil.ReadAll(req.Body)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+	defer req.Body.Close()
+	var event events.Event
+	err = json.Unmarshal(post, &event)
+	if err != nil {
+		log.Println("[WARN]", err.Error())
+		http.Error(w, "400, Invalid JSON", http.StatusBadRequest)
+		return
+	}
+
+	// Fill some info to received event
+	if config.BasicAuth != nil && config.BasicAuth.Active == true {
+		user, _, _ := req.BasicAuth()
+		event.AuthUserSource = user
+	}
+	event.Timestamp = time.Now()
+	event.Gen256Sum()
+	err = event.Check()
+	if err != nil {
+		log.Println("[WARN] Event Check:", err.Error())
+		http.Error(w, "400, Invalid event: " + err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	// Asynchronously send metrics to plugins
+	var wg sync.WaitGroup
+	for _, p := range eventPluginList {
+		wg.Add(1)
+		go func(p plugins.EventPlugin, e events.Event) {
+			err := p.Send(e)
+			if err != nil {
+				log.Println("[WARN]", err.Error())
+			}
+			wg.Done()
+		}(p, event)
 	}
 	wg.Wait()
 	return
