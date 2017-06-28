@@ -1,7 +1,7 @@
 # Greedee
 Fast and Modular Collectd HTTP Gateway
 
-> Greedee swims over the internets to eat small metrics
+> Greedee swims over the internets to eat small metrics and events
 
 ![greedy](greedee.png)
 
@@ -11,13 +11,36 @@ Fast and Modular Collectd HTTP Gateway
 
 Greedee is a fast HTTP Gateway for collectd's 
 `write_http` plugin. It is very modular and can be very easily
-enhanced.
+enhanced. It can also ingests events (notifications) to be
+stored on database
 
 It supports:
 
 * Basic Auth
 * Graphite Backend
+* MySQL Backend (for events)
 * Console Backend (debug)
+
+### Configure Collectd
+```
+<Plugin write_http>
+   <Node "greedee">
+       URL "http://127.0.0.1:9223/metrics"
+       User "user"
+       Password "pass"
+       Format "JSON"
+   </Node>
+</Plugin>
+```
+
+### Sending an event through the API
+```
+curl -d '{"name": "postgresql", \
+          "type": "backup", \
+          "ttl": 36000, \
+          "description": "Nightly postgresql backup"}' \
+          http://127.0.0.1:9223/events -u "user:pass"
+```
 
 ## Install
 
@@ -42,6 +65,13 @@ make build
 ```
 ## Changelog
 
+### v0.2.0 - 2017-06-28
+
+* Events support
+* Plugins
+  * MySQL (events)
+* Some code clean
+
 ### v0.1.0 - 2017-05-08
 
 * Plugins
@@ -57,7 +87,7 @@ make build
 - [ ] Tests
 - [ ] More plugins
 
-## Contibutors
+## Contributors
 
 Feel free to make a pull request
 
