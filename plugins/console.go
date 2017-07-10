@@ -1,6 +1,7 @@
 package plugins
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/yanc0/greedee/collectd"
 	"log"
@@ -12,6 +13,7 @@ type ConsolePlugin struct {
 
 type ConsolePluginConfig struct {
 	Active bool `yaml:"active"`
+	Json   bool `yaml:"json"`
 }
 
 func NewConsolePlugin(config *ConsolePluginConfig) *ConsolePlugin {
@@ -30,11 +32,22 @@ func (console *ConsolePlugin) Init() error {
 
 func (console *ConsolePlugin) Send(cMetrics []collectd.CollectDMetric) error {
 	for _, cMetric := range cMetrics {
-		identifier, err := cMetric.CollectDIdentifier()
-		if err != nil {
-			log.Println("[WARN] Console:", err.Error())
-		} else {
-			fmt.Println("Console Plugin:", identifier, cMetric.Values)
+
+		// If json mode is disabled, print metric identifier instead
+		if !console.ConsolePluginConfig.Json {
+			identifier, err := cMetric.CollectDIdentifier()
+			if err != nil {
+				log.Println("[WARN] Console:", err.Error())
+			} else {
+				fmt.Println("Console Plugin:", identifier, cMetric.Values)
+			}
+		} else { // JSON mode
+			jsn, err := json.Marshal(cMetric)
+			if err != nil {
+				log.Println("[WARN] Console:", err.Error())
+			} else {
+				fmt.Println("Console Plugin:", string(jsn))
+			}
 		}
 	}
 	return nil

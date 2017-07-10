@@ -1,25 +1,25 @@
 package events
 
 import (
-	"time"
 	"crypto/sha256"
-	"fmt"
-	"unicode/utf8"
 	"errors"
+	"fmt"
+	"time"
+	"unicode/utf8"
 )
 
 type Event struct {
-	SHA256Sum string `gorm:"column:sha256_sum;size:64;primary_key"`
-	Name string `gorm:"index"`
-	Type string `gorm:"index"`
-	Description string
-	TTL int64
+	SHA256Sum      string `gorm:"column:sha256_sum;size:64;primary_key"`
+	Name           string `gorm:"index"`
+	Type           string `gorm:"index"`
+	Description    string
+	TTL            int64
 	AuthUserSource string
-	Timestamp time.Time
+	Timestamp      time.Time
 }
 
 // Generate UUID (SHA256) with event infos
-func (e *Event) Gen256Sum(){
+func (e *Event) Gen256Sum() {
 	eventBytes := []byte(e.Name + e.Type + e.Description + string(e.TTL) + e.Timestamp.String())
 	h := sha256.New()
 	h.Write(eventBytes)

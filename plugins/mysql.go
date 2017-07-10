@@ -2,22 +2,22 @@ package plugins
 
 import (
 	"fmt"
-	"github.com/yanc0/greedee/events"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"github.com/yanc0/greedee/events"
 	"log"
 )
 
 type MySQLPlugin struct {
-	Conn *gorm.DB
+	Conn              *gorm.DB
 	MySQLPluginConfig *MySQLPluginConfig
 }
 
 type MySQLPluginConfig struct {
-	Active bool `toml:"active"`
-	Host string `toml:"host"`
-	Port int `toml:"port"`
-	User string `toml:"user"`
+	Active   bool   `toml:"active"`
+	Host     string `toml:"host"`
+	Port     int    `toml:"port"`
+	User     string `toml:"user"`
 	Password string `toml:"password"`
 	Database string `toml:"database"`
 }

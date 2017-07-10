@@ -11,7 +11,7 @@ import (
 	"os"
 )
 
-var metricPluginList 	    []plugins.MetricPlugin
+var metricPluginList []plugins.MetricPlugin
 var eventPluginList []plugins.EventPlugin
 var config Config
 
@@ -67,7 +67,7 @@ func loadPlugins(config *Config) {
 	if len(metricPluginList) < 1 {
 		log.Println("[WARN] No plugins loaded")
 	} else {
-		log.Println("[INFO]", len(metricPluginList) + len(eventPluginList), "Plugins loaded")
+		log.Println("[INFO]", len(metricPluginList)+len(eventPluginList), "Plugins loaded")
 	}
 }
 

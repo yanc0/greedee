@@ -3,13 +3,13 @@ package main
 import (
 	"encoding/json"
 	"github.com/yanc0/greedee/collectd"
+	"github.com/yanc0/greedee/events"
+	"github.com/yanc0/greedee/plugins"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"strings"
 	"sync"
-	"github.com/yanc0/greedee/plugins"
-	"github.com/yanc0/greedee/events"
 	"time"
 )
 
@@ -104,7 +104,7 @@ func handlerEventPost(w http.ResponseWriter, req *http.Request) {
 	err = event.Check()
 	if err != nil {
 		log.Println("[WARN] Event Check:", err.Error())
-		http.Error(w, "400, Invalid event: " + err.Error(), http.StatusBadRequest)
+		http.Error(w, "400, Invalid event: "+err.Error(), http.StatusBadRequest)
 		return
 	}
 

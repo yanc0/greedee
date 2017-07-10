@@ -19,6 +19,7 @@ proto = "tcp"
 
 [console_plugin]
 active = false
+json = false
 
 # Events plugins
 
