@@ -114,11 +114,11 @@ func fromCollectDMetric(cMetric collectd.CollectDMetric) ([]gr.Metric, error) {
 	ident := cMetric.Host
 	ident = ident + "." + cMetric.Plugin
 	if cMetric.PluginInstance != "" {
-		ident = ident + "." + cMetric.PluginInstance
+		ident = ident + "-" + cMetric.PluginInstance
 	}
 	ident = ident + "." + cMetric.Type
 	if cMetric.TypeInstance != "" {
-		ident = ident + "." + cMetric.TypeInstance
+		ident = ident + "-" + cMetric.TypeInstance
 	}
 	for i, dsName := range cMetric.DSNames {
 		valueName := dsName
