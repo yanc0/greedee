@@ -2,6 +2,8 @@ package collectd
 
 import (
 	"errors"
+	"crypto/sha256"
+	"fmt"
 )
 
 type CollectDMetric struct {
@@ -18,7 +20,8 @@ type CollectDMetric struct {
 	Meta           map[string]string `json:"meta"`
 }
 
-func (cMetric *CollectDMetric) CollectDIdentifier() (string, error) {
+// Generate Metric identifier in SHA256 format
+func (cMetric *CollectDMetric) Identifier() (string, error) {
 	if cMetric.Host == "" || cMetric.Plugin == "" || cMetric.Type == "" {
 		return "", errors.New("Invalid Collectd Metric")
 	}
@@ -32,4 +35,16 @@ func (cMetric *CollectDMetric) CollectDIdentifier() (string, error) {
 		ident = ident + "-" + cMetric.TypeInstance
 	}
 	return ident, nil
+}
+
+// Generate Metric identifier in SHA256 format
+func (cMetric *CollectDMetric) Identifier256Sum() (string, error) {
+	ident, err := cMetric.Identifier()
+	if err != nil {
+		return "", err
+	}
+	eventBytes := []byte(ident)
+	h := sha256.New()
+	h.Write(eventBytes)
+	return fmt.Sprintf("%x", h.Sum(nil)), nil
 }

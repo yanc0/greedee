@@ -68,7 +68,7 @@ func (graphite *GraphitePlugin) Connect() error {
 	return nil
 }
 
-func (graphite *GraphitePlugin) Send(cMetrics []collectd.CollectDMetric) error {
+func (graphite *GraphitePlugin) Send(cMetrics []*collectd.CollectDMetric) error {
 	var toSend []gr.Metric
 	if graphite.Server == nil {
 		log.Println("[WARN] Graphite is not connected, retrying...")
@@ -102,7 +102,7 @@ func (graphite *GraphitePlugin) Send(cMetrics []collectd.CollectDMetric) error {
 	return nil
 }
 
-func fromCollectDMetric(cMetric collectd.CollectDMetric) ([]gr.Metric, error) {
+func fromCollectDMetric(cMetric *collectd.CollectDMetric) ([]gr.Metric, error) {
 	metrics := make([]gr.Metric, len(cMetric.Values))
 
 	if cMetric.Host == "" || cMetric.Plugin == "" || cMetric.Type == "" {

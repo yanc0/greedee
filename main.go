@@ -9,10 +9,13 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"github.com/yanc0/greedee/collectd"
 )
 
 var metricPluginList []plugins.MetricPlugin
 var eventPluginList []plugins.EventPlugin
+var transformer *collectd.Transformer
+
 var config Config
 
 type BasicAuth struct {
@@ -94,6 +97,13 @@ func initPlugins() {
 
 }
 
+func initTransformer() {
+	store := &collectd.MemStore{
+		Metrics: make(map[string]collectd.CollectDMetric),
+	}
+	transformer = collectd.NewTransformer("/etc", store)
+}
+
 func main() {
 	configPath := flag.String("config",
 		"/etc/greedee/config.toml",
@@ -103,6 +113,7 @@ func main() {
 	loadConfig(*configPath)
 	loadPlugins(&config)
 	initPlugins()
+	initTransformer()
 
 	listen := fmt.Sprintf("%s:%d", config.Listen, config.Port)
 

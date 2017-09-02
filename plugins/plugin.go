@@ -6,7 +6,7 @@ import (
 )
 
 type MetricPlugin interface {
-	Send(cMetric []collectd.CollectDMetric) error
+	Send(cMetric []*collectd.CollectDMetric) error
 	Init() error
 	Name() string
 }
