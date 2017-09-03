@@ -5,16 +5,17 @@ import (
 	"fmt"
 	"github.com/BurntSushi/toml"
 	"github.com/yanc0/greedee/plugins"
+	"github.com/yanc0/greedee/transformer"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
-	"github.com/yanc0/greedee/collectd"
 )
 
 var metricPluginList []plugins.MetricPlugin
 var eventPluginList []plugins.EventPlugin
-var transformer *collectd.Transformer
+var storePlugin plugins.StorePlugin
+var transform *transformer.Transformer
 
 var config Config
 
@@ -30,6 +31,7 @@ type Config struct {
 	GraphitePlugin *plugins.GraphitePluginConfig `toml:"graphite_plugin"`
 	ConsolePlugin  *plugins.ConsolePluginConfig  `toml:"console_plugin"`
 	MySQLPlugin    *plugins.MySQLPluginConfig    `toml:"mysql_plugin"`
+	MemStorePlugin *plugins.MemStorePluginConfig `toml:"memstore_plugin"`
 }
 
 func loadConfig(configPath string) {
@@ -72,6 +74,12 @@ func loadPlugins(config *Config) {
 	} else {
 		log.Println("[INFO]", len(metricPluginList)+len(eventPluginList), "Plugins loaded")
 	}
+
+	//Store Plugin
+	if storePlugin == nil {
+		storePlugin = plugins.NewMemStorePlugin(*config.MemStorePlugin)
+		log.Println("[INFO] Memstore plugin loaded")
+	}
 }
 
 func initPlugins() {
@@ -98,10 +106,7 @@ func initPlugins() {
 }
 
 func initTransformer() {
-	store := &collectd.MemStore{
-		Metrics: make(map[string]collectd.CollectDMetric),
-	}
-	transformer = collectd.NewTransformer("/etc", store)
+	transform = transformer.NewTransformer("/etc", storePlugin)
 }
 
 func main() {

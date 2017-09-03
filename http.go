@@ -61,7 +61,7 @@ func handlerMetricPost(w http.ResponseWriter, req *http.Request) {
 	}
 	// Transform metrics depending on their DSType
 	// https://collectd.org/wiki/index.php/Data_source
-	transformer.TransformMetrics(metrics)
+	transform.TransformMetrics(metrics)
 
 	// Asynchronously send metrics to plugins
 	var wg sync.WaitGroup

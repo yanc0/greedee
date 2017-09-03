@@ -16,3 +16,8 @@ type EventPlugin interface {
 	Init() error
 	Name() string
 }
+
+type StorePlugin interface {
+	Put(id string, metric collectd.CollectDMetric) error
+	Get(id string) *collectd.CollectDMetric
+}

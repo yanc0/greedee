@@ -48,3 +48,25 @@ func (cMetric *CollectDMetric) Identifier256Sum() (string, error) {
 	h.Write(eventBytes)
 	return fmt.Sprintf("%x", h.Sum(nil)), nil
 }
+
+// Clone return a deep copy of the CollectDMetric
+func (cMetric *CollectDMetric) Clone() CollectDMetric {
+	m := CollectDMetric{
+		Host: cMetric.Host,
+		Plugin: cMetric.Plugin,
+		PluginInstance: cMetric.PluginInstance,
+		Type: cMetric.Type,
+		TypeInstance: cMetric.TypeInstance,
+		Time: cMetric.Time,
+		Interval: cMetric.Interval,
+		DSTypes: make([]string, len(cMetric.DSTypes)),
+		DSNames: make([]string, len(cMetric.DSNames)),
+		Values: make([]float64, len(cMetric.Values)),
+		Meta: cMetric.Meta,
+	}
+	copy(m.DSTypes, cMetric.DSTypes)
+	copy(m.DSNames, cMetric.DSNames)
+	copy(m.Values, cMetric.Values)
+
+	return m
+}
