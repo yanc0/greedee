@@ -1,8 +1,8 @@
 package plugins
 
 import (
-	"log"
 	"github.com/yanc0/greedee/collectd"
+	"log"
 )
 
 type MemStorePluginConfig struct {
@@ -11,14 +11,14 @@ type MemStorePluginConfig struct {
 
 // In-memory store for collectd metrics
 type MemStorePlugin struct {
-	config MemStorePluginConfig
+	config  MemStorePluginConfig
 	metrics map[string]collectd.CollectDMetric
 }
 
 // NewMemStore return initialized MemStore
 func NewMemStorePlugin(config MemStorePluginConfig) *MemStorePlugin {
 	return &MemStorePlugin{
-		config: config,
+		config:  config,
 		metrics: make(map[string]collectd.CollectDMetric),
 	}
 }

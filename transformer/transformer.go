@@ -1,26 +1,24 @@
 package transformer
 
 import (
+	"github.com/yanc0/greedee/collectd"
+	"github.com/yanc0/greedee/plugins"
 	"github.com/yanc0/greedee/utils"
 	"log"
 	"math"
-	"github.com/yanc0/greedee/plugins"
-	"github.com/yanc0/greedee/collectd"
 )
 
 // Transformer precalculate data of certain types like derive or counter.
 // Before sending data to plugin, we have to apply certain formula and
 // store previous metrics.
 type Transformer struct {
-	TypesDBPath string
-	store       plugins.StorePlugin
+	store plugins.StorePlugin
 }
 
 // NewTransformer return a transformer
-func NewTransformer(typesDBPath string, st plugins.StorePlugin) *Transformer {
+func NewTransformer(st plugins.StorePlugin) *Transformer {
 	return &Transformer{
-		TypesDBPath: typesDBPath,
-		store:       st,
+		store: st,
 	}
 }
 

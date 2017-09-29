@@ -106,7 +106,7 @@ func initPlugins() {
 }
 
 func initTransformer() {
-	transform = transformer.NewTransformer("/etc", storePlugin)
+	transform = transformer.NewTransformer(storePlugin)
 }
 
 func main() {
