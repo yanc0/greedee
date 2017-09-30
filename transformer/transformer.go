@@ -35,7 +35,7 @@ func (tr *Transformer) TransformMetrics(metrics []*collectd.CollectDMetric) {
 // Tranform get old metric, store current data for later use and
 // apply formula on metric values
 func (tr *Transformer) Transform(m *collectd.CollectDMetric) {
-	metricID, err := m.Identifier256Sum()
+	metricID, err := m.IdentifierSHA1Sum()
 	if err != nil {
 		log.Println("[WARN] Metric error:", err)
 	}

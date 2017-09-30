@@ -1,9 +1,9 @@
 package collectd
 
 import (
-	"crypto/sha256"
 	"errors"
 	"fmt"
+	"crypto/sha1"
 )
 
 type CollectDMetric struct {
@@ -37,14 +37,14 @@ func (cMetric *CollectDMetric) Identifier() (string, error) {
 	return ident, nil
 }
 
-// Generate Metric identifier in SHA256 format
-func (cMetric *CollectDMetric) Identifier256Sum() (string, error) {
+// Generate Metric identifier in SHA1 format
+func (cMetric *CollectDMetric) IdentifierSHA1Sum() (string, error) {
 	ident, err := cMetric.Identifier()
 	if err != nil {
 		return "", err
 	}
 	eventBytes := []byte(ident)
-	h := sha256.New()
+	h := sha1.New()
 	h.Write(eventBytes)
 	return fmt.Sprintf("%x", h.Sum(nil)), nil
 }
