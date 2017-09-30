@@ -20,7 +20,7 @@ type CollectDMetric struct {
 	Meta           map[string]string `json:"meta"`
 }
 
-// Generate Metric identifier in SHA256 format
+// Generate Metric identifier
 func (cMetric *CollectDMetric) Identifier() (string, error) {
 	if cMetric.Host == "" || cMetric.Plugin == "" || cMetric.Type == "" {
 		return "", errors.New("Invalid Collectd Metric")

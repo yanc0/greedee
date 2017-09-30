@@ -25,7 +25,7 @@ func NewMemStorePlugin(config MemStorePluginConfig) *MemStorePlugin {
 
 // Save collectd metric in memory
 func (ms *MemStorePlugin) Put(id string, metric collectd.CollectDMetric) error {
-	id, err := metric.Identifier256Sum()
+	id, err := metric.IdentifierSHA1Sum()
 	if err != nil {
 		log.Println("[ERR] Put metric in store failed:", err)
 		return err
