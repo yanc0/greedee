@@ -6,7 +6,7 @@ import (
 )
 
 type MetricPlugin interface {
-	Send(cMetric []collectd.CollectDMetric) error
+	Send(cMetric []*collectd.CollectDMetric) error
 	Init() error
 	Name() string
 }
@@ -15,4 +15,9 @@ type EventPlugin interface {
 	Send(event events.Event) error
 	Init() error
 	Name() string
+}
+
+type StorePlugin interface {
+	Put(id string, metric collectd.CollectDMetric) error
+	Get(id string) *collectd.CollectDMetric
 }
