@@ -43,7 +43,7 @@ func check(user string, pass string) bool {
 
 func handlerMetricPost(w http.ResponseWriter, req *http.Request) {
 	if req.Method != "POST" {
-		http.Error(w, "405 Method Not Allowed - POST Only", http.StatusMethodNotAllowed)
+		http.Error(w, errorJSON("405 Method Not Allowed - POST Only"), http.StatusMethodNotAllowed)
 		return
 	}
 
@@ -56,7 +56,7 @@ func handlerMetricPost(w http.ResponseWriter, req *http.Request) {
 	err = json.Unmarshal(post, &metrics)
 	if err != nil {
 		log.Println("[WARN]", err.Error())
-		http.Error(w, "400, Invalid JSON", http.StatusBadRequest)
+		http.Error(w, errorJSON("400, Invalid JSON"), http.StatusBadRequest)
 		return
 	}
 	// Asynchronously send metrics to plugins
@@ -77,7 +77,7 @@ func handlerMetricPost(w http.ResponseWriter, req *http.Request) {
 
 func handlerEventPost(w http.ResponseWriter, req *http.Request) {
 	if req.Method != "POST" {
-		http.Error(w, "405 Method Not Allowed - POST Only", http.StatusMethodNotAllowed)
+		http.Error(w, errorJSON("405 Method Not Allowed - POST Only"), http.StatusMethodNotAllowed)
 		return
 	}
 
@@ -90,7 +90,7 @@ func handlerEventPost(w http.ResponseWriter, req *http.Request) {
 	err = json.Unmarshal(post, &event)
 	if err != nil {
 		log.Println("[WARN]", err.Error())
-		http.Error(w, "400, Invalid JSON", http.StatusBadRequest)
+		http.Error(w, errorJSON("400, Invalid JSON"), http.StatusBadRequest)
 		return
 	}
 
@@ -99,19 +99,20 @@ func handlerEventPost(w http.ResponseWriter, req *http.Request) {
 		user, _, _ := req.BasicAuth()
 		event.AuthUserSource = user
 	}
-	event.Timestamp = time.Now()
+	event.CreatedAt = time.Now()
 	event.Gen256Sum()
+	event.GenExpiredAt()
 	err = event.Check()
 	if err != nil {
 		log.Println("[WARN] Event Check:", err.Error())
-		http.Error(w, "400, Invalid event: "+err.Error(), http.StatusBadRequest)
+		http.Error(w, errorJSON("400, Invalid event: "+err.Error()), http.StatusBadRequest)
 		return
 	}
 
 	// Asynchronously send metrics to plugins
 	var wg sync.WaitGroup
 	for _, p := range eventPluginList {
-		wg.Add(1)
+		wg.Add(len(eventPluginList))
 		go func(p plugins.EventPlugin, e events.Event) {
 			err := p.Send(e)
 			if err != nil {
@@ -122,4 +123,12 @@ func handlerEventPost(w http.ResponseWriter, req *http.Request) {
 	}
 	wg.Wait()
 	return
+}
+
+func errorJSON(text string) string {
+	response := map[string]string{
+		"error": text,
+	}
+	responseBody, _ := json.Marshal(response)
+	return string(responseBody)
 }

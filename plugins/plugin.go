@@ -15,4 +15,7 @@ type EventPlugin interface {
 	Send(event events.Event) error
 	Init() error
 	Name() string
+	GetExpiredAndNotProcessed() ([]events.Event, error)
+	Process(e events.Event, expired bool) error
+	ProcessAll(e events.Event) error
 }
