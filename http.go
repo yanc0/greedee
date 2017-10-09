@@ -52,18 +52,22 @@ func handlerMetricPost(w http.ResponseWriter, req *http.Request) {
 		log.Fatal(err.Error())
 	}
 	defer req.Body.Close()
-	var metrics []collectd.CollectDMetric
+	var metrics []*collectd.CollectDMetric
 	err = json.Unmarshal(post, &metrics)
 	if err != nil {
 		log.Println("[WARN]", err.Error())
 		http.Error(w, errorJSON("400, Invalid JSON"), http.StatusBadRequest)
 		return
 	}
+	// Transform metrics depending on their DSType
+	// https://collectd.org/wiki/index.php/Data_source
+	transform.TransformMetrics(metrics)
+
 	// Asynchronously send metrics to plugins
 	var wg sync.WaitGroup
 	for _, p := range metricPluginList {
 		wg.Add(1)
-		go func(p plugins.MetricPlugin, metrics []collectd.CollectDMetric) {
+		go func(p plugins.MetricPlugin, metrics []*collectd.CollectDMetric) {
 			err := p.Send(metrics)
 			if err != nil {
 				log.Println("[WARN]", err.Error())

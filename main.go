@@ -7,7 +7,9 @@ import (
 	"github.com/yanc0/greedee/plugins"
 	pluginEvent "github.com/yanc0/greedee/plugins/event"
 	pluginMetric "github.com/yanc0/greedee/plugins/metric"
+	pluginStore "github.com/yanc0/greedee/plugins/store"
 	"github.com/yanc0/greedee/reactor"
+	"github.com/yanc0/greedee/transformer"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -17,6 +19,9 @@ import (
 
 var metricPluginList []plugins.MetricPlugin
 var eventPluginList []plugins.EventPlugin
+var storePlugin plugins.StorePlugin
+var transform *transformer.Transformer
+
 var config Config
 
 type BasicAuth struct {
@@ -31,6 +36,7 @@ type Config struct {
 	GraphitePlugin *pluginMetric.GraphitePluginConfig `toml:"graphite_plugin"`
 	ConsolePlugin  *pluginMetric.ConsolePluginConfig  `toml:"console_plugin"`
 	MySQLPlugin    *pluginEvent.MySQLPluginConfig     `toml:"mysql_plugin"`
+	MemStorePlugin *pluginStore.MemStorePluginConfig  `toml:"memstore_plugin"`
 }
 
 func loadConfig(configPath string) {
@@ -79,6 +85,12 @@ func loadPlugins(config *Config) {
 	} else {
 		log.Println("[INFO]", nbPlugins, "Plugins loaded in", time.Since(t0))
 	}
+
+	//Store Plugin
+	if storePlugin == nil {
+		storePlugin = pluginStore.NewMemStorePlugin(*config.MemStorePlugin)
+		log.Println("[INFO] Memstore plugin loaded")
+	}
 }
 
 func initPlugins() {
@@ -116,6 +128,13 @@ func initReactors() {
 	log.Println("[INFO] Reactors launched in", time.Since(t0))
 }
 
+func initTransformer() {
+	t0 := time.Now()
+	transform = transformer.NewTransformer(storePlugin)
+	log.Println("[INFO] Metrics transformer launched in", time.Since(t0))
+
+}
+
 func main() {
 	configPath := flag.String("config",
 		"/etc/greedee/config.toml",
@@ -126,6 +145,7 @@ func main() {
 	loadPlugins(&config)
 	initPlugins()
 	initReactors()
+	initTransformer()
 
 	listen := fmt.Sprintf("%s:%d", config.Listen, config.Port)
 

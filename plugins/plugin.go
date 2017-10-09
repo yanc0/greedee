@@ -6,7 +6,7 @@ import (
 )
 
 type MetricPlugin interface {
-	Send(cMetric []collectd.CollectDMetric) error
+	Send(cMetric []*collectd.CollectDMetric) error
 	Init() error
 	Name() string
 }
@@ -18,4 +18,9 @@ type EventPlugin interface {
 	GetExpiredAndNotProcessed() ([]events.Event, error)
 	Process(e events.Event, expired bool) error
 	ProcessAll(e events.Event) error
+}
+
+type StorePlugin interface {
+	Put(id string, metric collectd.CollectDMetric) error
+	Get(id string) *collectd.CollectDMetric
 }

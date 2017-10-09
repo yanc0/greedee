@@ -30,12 +30,12 @@ func (console *ConsolePlugin) Init() error {
 	return nil
 }
 
-func (console *ConsolePlugin) Send(cMetrics []collectd.CollectDMetric) error {
+func (console *ConsolePlugin) Send(cMetrics []*collectd.CollectDMetric) error {
 	for _, cMetric := range cMetrics {
 
 		// If json mode is disabled, print metric identifier instead
 		if !console.ConsolePluginConfig.Json {
-			identifier, err := cMetric.CollectDIdentifier()
+			identifier, err := cMetric.Identifier()
 			if err != nil {
 				log.Println("[WARN] Console:", err.Error())
 			} else {

@@ -30,3 +30,8 @@ port = 3306
 user = "myuser"
 password = "p@ssw0rd"
 database = "events"
+
+# Store plugin (default memstore)
+
+[memstore_plugin]
+active = true
