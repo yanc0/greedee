@@ -17,7 +17,6 @@ type Event struct {
 	ExpiresAt      time.Time `gorm:"index"`
 	Description    string
 	Source         string
-	Tags           string
 	Processed      bool
 	Expired        bool
 	Status         uint8

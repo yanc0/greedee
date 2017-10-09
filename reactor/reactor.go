@@ -27,7 +27,6 @@ func (r *Reactor) Launch() {
 					AuthUserSource: e.AuthUserSource,
 					Name:           e.Name,
 					Description:    fmt.Sprintf("%s (%s)", e.Description, "expired"),
-					Tags:           e.Tags,
 				}
 				newEv.Fail()
 				newEv.Gen256Sum()

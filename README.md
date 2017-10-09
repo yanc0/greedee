@@ -35,12 +35,19 @@ It supports:
 
 ### Sending an event through the API
 ```
-curl -d '{"name": "postgresql", \
-          "type": "backup", \
-          "ttl": 36000, \
+curl -d '{"name": "postgresql_backup",
+          "ttl": 36000,
+          "status": 0,
+          "source": "curl",
           "description": "Nightly postgresql backup"}' \
           http://127.0.0.1:9223/events -u "user:pass"
 ```
+
+**name (mandatory)**: name of the event
+**ttl**: time to live in seconds, if set, trigger failed event if no event with the same name is created after this time
+**status**: OK = 0, FAILURE > 0
+**description**: Short explanation of the event
+**source**: Source of event (example: curl, cron, ansible, etc.)
 
 ## Install
 
@@ -64,6 +71,12 @@ make setup
 make build
 ```
 ## Changelog
+
+### v0.3.0 - 2017-10-09
+
+* Event Reactor - Trigger failed events when events are expired
+* Metric Transformer - Calculate derive metrics ith previous data
+
 
 ### v0.2.0 - 2017-06-28
 
