@@ -1,4 +1,4 @@
-package plugins
+package store
 
 import (
 	"github.com/yanc0/greedee/collectd"

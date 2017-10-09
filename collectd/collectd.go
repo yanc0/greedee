@@ -1,9 +1,9 @@
 package collectd
 
 import (
+	"crypto/sha1"
 	"errors"
 	"fmt"
-	"crypto/sha1"
 )
 
 type CollectDMetric struct {
