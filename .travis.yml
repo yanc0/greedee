@@ -4,7 +4,6 @@ go:
 
 before_deploy:
   - ls -alih $GOPATH/src/github.com/yanc0/greedee
-  - $GOPATH/src/github.com/yanc0/greedee/greedee
 deploy:
   provider: releases
   api_key:
