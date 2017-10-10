@@ -9,3 +9,4 @@ deploy:
   file: $GOPATH/src/github.com/yanc0/greedee/greedee
   on:
     tags: true
+    all_branches: true
