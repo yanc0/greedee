@@ -1,6 +1,6 @@
 language: go
 go:
-- "1.8.1"
+- "1.9.0"
 
 before_deploy:
   - ls -alih $GOPATH/src/github.com/yanc0/greedee
