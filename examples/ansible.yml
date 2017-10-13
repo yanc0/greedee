@@ -1,0 +1,17 @@
+- hosts: localhost
+  vars:
+    greedee_app_deployment:
+      name: "app_deployment"
+      ttl: 0
+      status: 0
+      description: "my app deployment"
+      
+  tasks:
+    - name: "my app deployment"
+      uri:
+        url: "http://localhost:9223/events"
+        method: "POST"
+        user: "user"
+        password: "pass"
+        body: "{{ greedee_app_deployment | to_json }}"
+        force_basic_auth: yes
