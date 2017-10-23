@@ -72,6 +72,10 @@ make build
 ```
 ## Changelog
 
+### v0.3.1 - 2017-10-23
+
+* Add route /version
+
 ### v0.3.0 - 2017-10-09
 
 * Event Reactor - Trigger failed events when events are expired
