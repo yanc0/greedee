@@ -21,6 +21,7 @@ var metricPluginList []plugins.MetricPlugin
 var eventPluginList []plugins.EventPlugin
 var storePlugin plugins.StorePlugin
 var transform *transformer.Transformer
+var version = "0.3.1"
 
 var config Config
 
@@ -151,5 +152,6 @@ func main() {
 
 	http.HandleFunc("/metrics", auth(handlerMetricPost))
 	http.HandleFunc("/events", auth(handlerEventPost))
+	http.HandleFunc("/version", handlerVersionGet)
 	log.Fatal(http.ListenAndServe(listen, nil))
 }

@@ -129,6 +129,21 @@ func handlerEventPost(w http.ResponseWriter, req *http.Request) {
 	return
 }
 
+func handlerVersionGet(w http.ResponseWriter, req *http.Request) {
+	if req.Method != "GET" {
+		http.Error(w, errorJSON("405 Method Not Allowed - POST Only"), http.StatusMethodNotAllowed)
+		return
+	}
+
+	resp := map[string]string{
+		"version": version,
+	}
+
+	jsonResp, _ := json.Marshal(resp)
+	w.Write(jsonResp)
+	return
+}
+
 func errorJSON(text string) string {
 	response := map[string]string{
 		"error": text,
