@@ -24,6 +24,7 @@ func (r *Reactor) Launch() {
 				newEv := events.Event{
 					Source:         "greedee reactor",
 					CreatedAt:      time.Now(),
+					ExpiresAt:      time.Now(),
 					AuthUserSource: e.AuthUserSource,
 					Name:           e.Name,
 					Description:    fmt.Sprintf("%s (%s)", e.Description, "expired"),
