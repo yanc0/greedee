@@ -21,7 +21,7 @@ var metricPluginList []plugins.MetricPlugin
 var eventPluginList []plugins.EventPlugin
 var storePlugin plugins.StorePlugin
 var transform *transformer.Transformer
-var version = "0.3.1"
+var version = "0.3.2"
 
 var config Config
 
