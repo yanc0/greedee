@@ -72,6 +72,10 @@ make build
 ```
 ## Changelog
 
+### v0.3.3 - 2017-11-12
+
+* Fix failing event error with mysql strict compat
+
 ### v0.3.2 - 2017-11-12
 
 * Remove 00-00-0000 date for mysql 5.7 strict mode compatibility
