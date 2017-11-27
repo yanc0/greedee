@@ -32,6 +32,10 @@ func (e *Event) Gen256Sum() {
 
 // Add TTL to timestamp and calculate event expiration date
 func (e *Event) GenExpiredAt() {
+	// Default to time.Now for mysql 5.7 strict mode
+	e.ExpiresAt = time.Now()
+	
+	// Else, calculate the time this event will expires
 	if e.IsExpirable() {
 		e.ExpiresAt = e.CreatedAt.Add(time.Duration(e.TTL) * time.Second)
 	}
