@@ -43,11 +43,11 @@ curl -d '{"name": "postgresql_backup",
           http://127.0.0.1:9223/events -u "user:pass"
 ```
 
-**name (mandatory)**: name of the event
-**ttl**: time to live in seconds, if set, trigger failed event if no event with the same name is created after this time
-**status**: OK = 0, FAILURE > 0
-**description**: Short explanation of the event
-**source**: Source of event (example: curl, cron, ansible, etc.)
+* **name (mandatory)**: name of the event
+* **ttl**: time to live in seconds, if set, trigger failed event if no event with the same name is created after this time
+* **status**: OK = 0, FAILURE > 0
+* **description**: Short explanation of the event
+* **source**: Source of event (example: curl, cron, ansible, etc.)
 
 ## Install
 
