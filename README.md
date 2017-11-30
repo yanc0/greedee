@@ -72,6 +72,11 @@ make build
 ```
 ## Changelog
 
+### v0.3.4 - 2017-11-30
+
+* Add HEAD in /version allowed method (for loadbalancing healthcheck
+purpose)
+
 ### v0.3.3 - 2017-11-12
 
 * Fix failing event error with mysql strict compat

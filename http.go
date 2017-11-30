@@ -130,7 +130,7 @@ func handlerEventPost(w http.ResponseWriter, req *http.Request) {
 }
 
 func handlerVersionGet(w http.ResponseWriter, req *http.Request) {
-	if req.Method != "GET" {
+	if req.Method != "GET" && req.Method != "HEAD" {
 		http.Error(w, errorJSON("405 Method Not Allowed - POST Only"), http.StatusMethodNotAllowed)
 		return
 	}
